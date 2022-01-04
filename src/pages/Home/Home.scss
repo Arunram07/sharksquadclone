@@ -1,0 +1,25 @@
+.home {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.connect-modal {
+  max-width: 540px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
+  background: #191919;
+}
+
+.connect-modal div {
+  width: 100%;
+  margin-top: 2em;
+}
+
+.connect-modal div button {
+  width: 100%;
+}
