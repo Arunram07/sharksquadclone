@@ -43,7 +43,7 @@ const Sale: React.FC = () => {
           <div className="card">
             <div className="card-grid">
               <div className="block-image">
-                <button className="primary">
+                <button className="secondary">
                   <b>UNREVEALED</b> TOT NFT
                 </button>
                 <div className="image-container">
@@ -53,7 +53,7 @@ const Sale: React.FC = () => {
               <div className="block-content">
                 <div className="line">
                   <h3 className="mb-20">FEELING LUCKY?</h3>
-                  <button className="primary">
+                  <button className="secondary">
                     Mint after 12PM UTC will be recieved the day after
                   </button>
                 </div>
@@ -112,7 +112,11 @@ const Sale: React.FC = () => {
           </div>
           <div className="card-footer mt-30">
             <p className="secondary">
-              Should you need any help, reach us via Discord and contact SOS Crew
+              Should you need any help, reach us via{" "}
+              <a href="/" style={{ color: "inherit" }}>
+                Discord
+              </a>{" "}
+              and contact SOS Crew
             </p>
           </div>
         </div>

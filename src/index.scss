@@ -74,20 +74,34 @@ p.secondary {
 }
 
 button.primary {
-  background: #e6e6e6;
+  background: #14279b;
+  border-radius: 5px;
   outline: none;
   border: none;
   font-size: 12px;
   line-height: 15px;
-  color: #393e5c;
+  color: #e6e6e6;
   text-align: center;
   padding: 12px 2em;
   width: 100%;
   cursor: pointer;
-  transition: background 300ms linear;
+  transition: opacity 300ms linear;
+  opacity: 1;
 
   &:disabled {
+    opacity: 0.7;
     cursor: no-drop;
-    background-color: rgba(230, 230, 230, 0.7);
   }
+}
+
+button.secondary {
+  background: #5c7aea;
+  outline: none;
+  border: none;
+  font-size: 12px;
+  line-height: 15px;
+  color: #e6e6e6;
+  text-align: center;
+  padding: 12px 2em;
+  width: 100%;
 }
