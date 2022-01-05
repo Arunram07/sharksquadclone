@@ -2,11 +2,16 @@ import React, { useCallback, useEffect } from "react";
 
 import "./Sale.scss";
 import Header from "../../components/Header/Header";
-import { getMode, getPrice, getPriceForPresale } from "../../utils/contractEssentials";
+import {
+  getMode,
+  getPrice,
+  getPriceForPresale,
+} from "../../utils/contractEssentials";
+import Web3 from "web3";
 
 const Sale: React.FC = () => {
   const handleGetPrice = useCallback(async () => {
-    const price = await getPriceForPresale();
+    const price = Web3.utils.fromWei(await getPriceForPresale());
     console.log(price);
   }, []);
 
@@ -58,18 +63,20 @@ const Sale: React.FC = () => {
               <h3 className="mb-20">NEXT UP!</h3>
               <h4 className="mb-10">PIXEL SHARKS FREE MINT</h4>
               <p className="primary mb-20">
-                SOS Meta ID (Pixel Shark) can be minted for FREE after the daily reveal inThe Vault
+                SOS Meta ID (Pixel Shark) can be minted for FREE after the daily
+                reveal inThe Vault
               </p>
               <h4 className="mb-10">VX SHARKS FREE MINT</h4>
               <p className="primary">
-                SOS VX (3D Version) can be minted for FREE in Q1 2022 if you hold you Genesis Shark
-                & SOS Meta ID.
+                SOS VX (3D Version) can be minted for FREE in Q1 2022 if you
+                hold you Genesis Shark & SOS Meta ID.
               </p>
             </div>
           </div>
           <div className="card-footer mt-30">
             <p className="secondary">
-              Should you need any help, reach us via Discord and contact SOS Crew
+              Should you need any help, reach us via Discord and contact SOS
+              Crew
             </p>
           </div>
         </div>
