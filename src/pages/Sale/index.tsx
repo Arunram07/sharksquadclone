@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./Sale.scss";
 import Header from "../../components/Header/Header";
 import demo from "../../assets/demo.png";
+import { ReactComponent as Loader } from "../../assets/images/loader.svg";
 import { getInitialState, mint } from "../../utils/contractEssentials";
 
 const Sale: React.FC = () => {
@@ -11,6 +12,7 @@ const Sale: React.FC = () => {
   const [nftMintCount, setNftMintCount] = useState(1);
   const [supply, setSupply] = useState<number | undefined>(0);
   const [loading, setLoading] = useState(false);
+  const [processing, setProcessing] = useState(false);
 
   const handleGetPrice = useCallback(async () => {
     setLoading(true);
@@ -29,14 +31,14 @@ const Sale: React.FC = () => {
   }, [handleGetPrice]);
 
   const handleMint = async () => {
-    setLoading(true);
+    setProcessing(true);
     try {
       await mint(nftMintCount);
       await handleGetPrice();
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setProcessing(false);
     }
   };
 
@@ -94,10 +96,10 @@ const Sale: React.FC = () => {
                   </div>
                   <button
                     className="primary"
-                    disabled={loading || nftMintCount === 0}
+                    disabled={loading || processing || nftMintCount === 0}
                     onClick={() => handleMint()}
                   >
-                    Sold out
+                    Buy
                   </button>
                 </div>
               </div>
@@ -126,6 +128,16 @@ const Sale: React.FC = () => {
           </div>
         </div>
       </div>
+      {processing && (
+        <div className="backdrop">
+          <div className="modal">
+            <div className="block-loader loader">
+              <Loader />
+            </div>
+            <p>Waiting for Confirmation</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -16,9 +16,11 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fff;
   color: #fff;
   font-family: "comfortaa-regular";
+  background: url(./assets/background.svg) no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 @for $i from 5 to 51 {
@@ -104,6 +106,11 @@ button.primary {
     opacity: 0.7;
     cursor: no-drop;
   }
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 button.secondary {
@@ -117,4 +124,34 @@ button.secondary {
   width: 100%;
   background: #e6e6e6;
   border-radius: 2px;
+}
+
+.loader {
+  animation: spin 4s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+
+  @-moz-keyframes spin {
+    from {
+      -moz-transform: rotate(0deg);
+    }
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }

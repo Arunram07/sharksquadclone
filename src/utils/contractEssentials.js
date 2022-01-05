@@ -86,7 +86,7 @@ export async function mint(_quantity) {
     const price = await getPriceForPresale();
     return await contract.methods.presalesMint(_quantity, _quantity).send({
       from: window.ethereum.selectedAddress,
-      value: price,
+      value: price * _quantity,
     });
   }
 
@@ -94,6 +94,6 @@ export async function mint(_quantity) {
     const price = await getPriceForPublicsale();
     return await contract.methods
       .publicSalesMint(_quantity)
-      .send({ from: window.ethereum.selectedAddress, value: price });
+      .send({ from: window.ethereum.selectedAddress, value: price * _quantity });
   }
 }

@@ -11,10 +11,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.5em;
-  background: #3d56b2;
+  padding: 50px;
+  background: rgba(61, 86, 178, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 5px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 00.3);
 }
 
 .connect-modal div {

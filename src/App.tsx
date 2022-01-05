@@ -7,7 +7,7 @@ import { Home, Sale } from "./pages";
 import { NETWORK } from "./utils/connector";
 
 const App: React.FC = () => {
-  const { chainId } = useWeb3React();
+  const { chainId, active } = useWeb3React();
   const [validNetwork, setValidNetwork] = useState(false);
   useEagerConnect();
 
@@ -25,7 +25,7 @@ const App: React.FC = () => {
           path="/"
           element={!validNetwork ? <Home validNetwork={validNetwork} /> : <Navigate to="/sale" />}
         />
-        <Route path="/sale" element={validNetwork ? <Sale /> : <Navigate to="/" />} />
+        <Route path="/sale" element={active && validNetwork ? <Sale /> : <Navigate to="/" />} />
       </Routes>
     </div>
   );

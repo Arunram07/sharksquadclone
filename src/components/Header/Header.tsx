@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           <Logo />
         </div>
         <div className="address">
-          {account && `${account?.slice(0, 6)}...${account?.slice(account?.length - 6)}`}
+          {account && `${account?.slice(0, 3)}...${account?.slice(account?.length - 3)}`}
         </div>
       </div>
     </header>
