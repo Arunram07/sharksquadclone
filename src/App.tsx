@@ -7,7 +7,7 @@ import { Home, Sale } from "./pages";
 import { NETWORK } from "./utils/connector";
 
 const App: React.FC = () => {
-  const { active, chainId } = useWeb3React();
+  const { chainId } = useWeb3React();
   const [validNetwork, setValidNetwork] = useState(false);
   useEagerConnect();
 

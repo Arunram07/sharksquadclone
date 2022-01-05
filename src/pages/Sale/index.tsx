@@ -1,19 +1,39 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import "./Sale.scss";
 import Header from "../../components/Header/Header";
-import { getMode, getPrice, getPriceForPresale } from "../../utils/contractEssentials";
 import demo from "../../assets/demo.png";
+import { getPrice, getRemainingSupply, mint } from "../../utils/contractEssentials";
 
 const Sale: React.FC = () => {
+  const [sellPrice, setSellPrice] = useState(0);
+  const [nftMintCount, setNftMintCount] = useState(0);
+  const [supply, setSupply] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const handleGetPrice = useCallback(async () => {
-    const price = await getPriceForPresale();
-    console.log(price);
+    setLoading(true);
+    setSupply(await getRemainingSupply());
+    const price = await getPrice();
+    if (price) setSellPrice(Number(price));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
     handleGetPrice();
   }, [handleGetPrice]);
+
+  const handleMint = async () => {
+    setLoading(true);
+    try {
+      await mint(nftMintCount);
+      await handleGetPrice();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -39,25 +59,41 @@ const Sale: React.FC = () => {
                 </div>
                 <div className="line">
                   <p className="primary">
-                    <b>0</b> of <b>7,777</b>
+                    <b>{supply}</b> of <b>7,777</b>
                   </p>
                   <p className="primary">SOS Genesis NFT Available</p>
                 </div>
                 <div className="line flex-between">
-                  <button className="count-btn" disabled>
+                  <button
+                    className="count-btn"
+                    disabled={nftMintCount === 0}
+                    onClick={() => setNftMintCount((c) => c - 1)}
+                  >
                     -
                   </button>
-                  <p className="counter">1</p>
-                  <button className="count-btn">+</button>
+                  <p className="counter">{nftMintCount}</p>
+                  <button
+                    className="count-btn"
+                    disabled={nftMintCount === 5}
+                    onClick={() => setNftMintCount((c) => c + 1)}
+                  >
+                    +
+                  </button>
                 </div>
                 <div>
                   <div className="flex-between mb-20">
                     <p className="primary">Total</p>
                     <p className="primary">
-                      <b>0.06</b> ETH
+                      <b>{sellPrice === 0 ? "-" : sellPrice}</b> ETH
                     </p>
                   </div>
-                  <button className="primary">Sold out</button>
+                  <button
+                    className="primary"
+                    disabled={loading || nftMintCount === 0}
+                    onClick={() => handleMint()}
+                  >
+                    Sold out
+                  </button>
                 </div>
               </div>
             </div>

@@ -84,4 +84,10 @@ button.primary {
   padding: 12px 2em;
   width: 100%;
   cursor: pointer;
+  transition: background 300ms linear;
+
+  &:disabled {
+    cursor: no-drop;
+    background-color: rgba(230, 230, 230, 0.7);
+  }
 }

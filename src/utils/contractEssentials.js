@@ -3,19 +3,19 @@ import { abi } from "./abi.js";
 
 const address = "0x6e4ad295b8c73c3015eafeac64140cc0e86fafec";
 
-const web3 = new Web3(window.ethereum);
+const web3 = new Web3(window?.ethereum);
 
 const contract = new web3.eth.Contract(abi, address);
 
-export async function remainingSupply() {
-  const total = await contract.methods.TOTAL_MAX_QTY.call();
+export async function getRemainingSupply() {
+  const total = await contract.methods.TOTAL_MAX_QTY().call();
   const minted = await contract.methods.totalSupply().call();
   return Number(total) - Number(minted);
 }
 
 export async function getMode() {
-  const isPresalesActivated = await contract.methods.isPresalesActivated.call();
-  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated.call();
+  const isPresalesActivated = await contract.methods.isPresalesActivated().call();
+  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated().call();
 
   if (isPresalesActivated) {
     return "PRESALE";
@@ -38,11 +38,11 @@ export const getPrice = async () => {
   const mode = await getMode();
 
   if (mode === "PRESALE") {
-    return await getPriceForPresale();
+    return Web3.utils.fromWei(await getPriceForPresale());
   }
 
   if (mode === "PUBLICSALE") {
-    return await getPriceForPublicsale();
+    return Web3.utils.fromWei(await getPriceForPublicsale());
   }
 };
 
