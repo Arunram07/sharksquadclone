@@ -1,6 +1,6 @@
 .sale-page-wrapper {
   margin-top: 64px;
-  padding-top: 60px;
+  padding: 60px;
   min-height: calc(100vh - 64px);
 }
 
@@ -12,7 +12,7 @@
 
 .card {
   padding: 1.5em;
-  background: #191919;
+  background: #3d56b2;
 }
 
 .card-grid {
@@ -30,16 +30,27 @@
   justify-content: space-between;
 }
 
-.card-grid .card-image {
+.card-grid .block-image {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.card-grid .card-image > div {
+.card-grid .block-image > div {
   width: 100%;
   height: 100%;
   background-color: #000;
+}
+
+.card-grid .block-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  > div {
+    width: 100%;
+  }
 }
 
 .card-content {

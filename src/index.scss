@@ -12,6 +12,76 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: #fff;
+}
+
+@for $i from 5 to 51 {
+  .p-#{$i} {
+    padding: $i + px;
+  }
+  .pt-#{$i} {
+    padding-top: $i + px;
+  }
+  .pl-#{$i} {
+    padding-left: $i + px;
+  }
+  .pr-#{$i} {
+    padding-right: $i + px;
+  }
+  .pb-#{$i} {
+    padding-bottom: $i + px;
+  }
+  .m-#{$i} {
+    margin: $i + px;
+  }
+  .mt-#{$i} {
+    margin-top: $i + px;
+  }
+  .ml-#{$i} {
+    margin-left: $i + px;
+  }
+  .mr-#{$i} {
+    margin-right: $i + px;
+  }
+  .mb-#{$i} {
+    margin-bottom: $i + px;
+  }
+}
+
+h3 {
+  font-size: 14px;
+  line-height: 22px;
+  color: #e6e6e6;
+}
+
+h4 {
+  font-size: 12px;
+  line-height: 18px;
+  color: #e6e6e6;
+}
+
+p.primary {
+  font-size: 12px;
+  line-height: 18px;
+  color: #e6e6e6;
+}
+
+p.secondary {
+  font-size: 12px;
+  line-height: 18px;
+  color: #14279b;
+}
+
+button.primary {
+  background: #e6e6e6;
+  outline: none;
+  border: none;
+  font-size: 12px;
+  line-height: 15px;
+  color: #393e5c;
+  text-align: center;
+  padding: 12px 2em;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 600;
 }

@@ -8,8 +8,10 @@ const Header: React.FC = () => {
   return (
     <header className="header-container">
       <div className="header">
-        <div>Logo</div>
-        <p>{account && `${account?.slice(0, 6)}...${account?.slice(account?.length - 6)}`}</p>
+        <div className="logo">Logo</div>
+        <div className="address">
+          {account && `${account?.slice(0, 6)}...${account?.slice(account?.length - 6)}`}
+        </div>
       </div>
     </header>
   );
