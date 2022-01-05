@@ -13,9 +13,21 @@ export async function getRemainingSupply() {
   return Number(total) - Number(minted);
 }
 
+export async function getPublicSaleLimit() {
+  return await contract.methods.PUBLIC_SALES_MAX_QTY_PER_TRANSACTION().call();
+}
+
+export async function getPresaleLimit() {
+  return await contract.methods.PRESALES_MAX_QTY_PER_MINTER().call();
+}
+
 export async function getMode() {
-  const isPresalesActivated = await contract.methods.isPresalesActivated().call();
-  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated().call();
+  const isPresalesActivated = await contract.methods
+    .isPresalesActivated()
+    .call();
+  const isPublicSalesActivated = await contract.methods
+    .isPublicSalesActivated()
+    .call();
 
   if (isPresalesActivated) {
     return "PRESALE";
@@ -48,7 +60,8 @@ export const getPrice = async () => {
 
 export async function mint(_quantity) {
   const isPresalesActivated = await contract.methods.isPresalesActivated.call();
-  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated.call();
+  const isPublicSalesActivated =
+    await contract.methods.isPublicSalesActivated.call();
 
   if (isPresalesActivated) {
     const price = await getPriceForPresale();
