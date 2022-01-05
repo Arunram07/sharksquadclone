@@ -13,6 +13,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fff;
+  color: #fff;
 }
 
 @for $i from 5 to 51 {
@@ -83,5 +84,4 @@ button.primary {
   padding: 12px 2em;
   width: 100%;
   cursor: pointer;
-  font-weight: 600;
 }

@@ -3,6 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import "./Sale.scss";
 import Header from "../../components/Header/Header";
 import { getMode, getPrice, getPriceForPresale } from "../../utils/contractEssentials";
+import demo from "../../assets/demo.png";
 
 const Sale: React.FC = () => {
   const handleGetPrice = useCallback(async () => {
@@ -22,8 +23,12 @@ const Sale: React.FC = () => {
           <div className="card">
             <div className="card-grid">
               <div className="block-image">
-                <p>unrevealed</p>
-                <div></div>
+                <button className="primary">
+                  <b>UNREVEALED</b> TOT NFT
+                </button>
+                <div className="image-container">
+                  <img src={demo} alt="nft" />
+                </div>
               </div>
               <div className="block-content">
                 <div className="line">
@@ -39,9 +44,11 @@ const Sale: React.FC = () => {
                   <p className="primary">SOS Genesis NFT Available</p>
                 </div>
                 <div className="line flex-between">
-                  <button>-</button>
-                  <p>1</p>
-                  <button>+</button>
+                  <button className="count-btn" disabled>
+                    -
+                  </button>
+                  <p className="counter">1</p>
+                  <button className="count-btn">+</button>
                 </div>
                 <div>
                   <div className="flex-between mb-20">
