@@ -10,7 +10,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ validNetwork }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { activate, active } = useWeb3React();
 
   const handleConnect = async () => {
