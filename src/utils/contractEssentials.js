@@ -92,8 +92,9 @@ export async function mint(_quantity) {
 
   if (isPublicSalesActivated) {
     const price = await getPriceForPublicsale();
-    return await contract.methods
-      .publicSalesMint(_quantity)
-      .send({ from: window.ethereum.selectedAddress, value: price * _quantity });
+    return await contract.methods.publicSalesMint(_quantity).send({
+      from: window.ethereum.selectedAddress,
+      value: price * _quantity,
+    });
   }
 }
