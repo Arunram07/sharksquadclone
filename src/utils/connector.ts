@@ -1,8 +1,14 @@
-import { InjectedConnector } from "@web3-react/injected-connector";
 import Web3 from "web3";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 
 export const Injected = new InjectedConnector({
   supportedChainIds: [1, 2, 3, 5, 47, 96, 80001],
+});
+
+export const walletConnect = new WalletConnectConnector({
+  rpc: { 1: "https://rpc-mumbai.maticvigil.com/" },
+  qrcode: true,
 });
 
 export const NETWORK = 80001;

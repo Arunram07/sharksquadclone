@@ -22,12 +22,8 @@ export async function getPresaleLimit() {
 }
 
 export async function getMode() {
-  const isPresalesActivated = await contract.methods
-    .isPresalesActivated()
-    .call();
-  const isPublicSalesActivated = await contract.methods
-    .isPublicSalesActivated()
-    .call();
+  const isPresalesActivated = await contract.methods.isPresalesActivated().call();
+  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated().call();
 
   if (isPresalesActivated) {
     return "PRESALE";
@@ -46,22 +42,45 @@ export async function getPriceForPublicsale() {
   return await contract.methods.PUBLIC_SALES_PRICE().call();
 }
 
-export const getPrice = async () => {
+const getPrice = async () => {
   const mode = await getMode();
 
   if (mode === "PRESALE") {
-    return Web3.utils.fromWei(await getPriceForPresale());
+    return Number(Web3.utils.fromWei(await getPriceForPresale()));
   }
 
   if (mode === "PUBLICSALE") {
-    return Web3.utils.fromWei(await getPriceForPublicsale());
+    return Number(Web3.utils.fromWei(await getPriceForPublicsale()));
+  }
+};
+
+const getQuantityLimit = async () => {
+  const mode = await getMode();
+
+  if (mode === "PRESALE") {
+    return Number(await getPresaleLimit());
+  }
+
+  if (mode === "PUBLICSALE") {
+    return Number(await getPublicSaleLimit());
+  }
+};
+
+export const getInitialState = async () => {
+  try {
+    return {
+      quantityLimit: await getQuantityLimit(),
+      price: await getPrice(),
+      remainingSupply: await getRemainingSupply(),
+    };
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export async function mint(_quantity) {
   const isPresalesActivated = await contract.methods.isPresalesActivated.call();
-  const isPublicSalesActivated =
-    await contract.methods.isPublicSalesActivated.call();
+  const isPublicSalesActivated = await contract.methods.isPublicSalesActivated.call();
 
   if (isPresalesActivated) {
     const price = await getPriceForPresale();

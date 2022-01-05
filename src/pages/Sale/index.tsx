@@ -3,19 +3,24 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./Sale.scss";
 import Header from "../../components/Header/Header";
 import demo from "../../assets/demo.png";
-import { getPrice, getRemainingSupply, mint } from "../../utils/contractEssentials";
+import { getInitialState, mint } from "../../utils/contractEssentials";
 
 const Sale: React.FC = () => {
-  const [sellPrice, setSellPrice] = useState(0);
-  const [nftMintCount, setNftMintCount] = useState(0);
-  const [supply, setSupply] = useState(0);
+  const [sellPrice, setSellPrice] = useState<number | undefined>(0);
+  const [maxQuantity, setMaxQuantity] = useState<number | undefined>(0);
+  const [nftMintCount, setNftMintCount] = useState(1);
+  const [supply, setSupply] = useState<number | undefined>(0);
   const [loading, setLoading] = useState(false);
 
   const handleGetPrice = useCallback(async () => {
     setLoading(true);
-    setSupply(await getRemainingSupply());
-    const price = await getPrice();
-    if (price) setSellPrice(Number(price));
+    const data = await getInitialState();
+
+    if (data) {
+      setSellPrice(data.price);
+      setSupply(data.remainingSupply);
+      setMaxQuantity(data.quantityLimit);
+    }
     setLoading(false);
   }, []);
 
@@ -43,7 +48,7 @@ const Sale: React.FC = () => {
           <div className="card">
             <div className="card-grid">
               <div className="block-image">
-                <button className="secondary">
+                <button className="secondary" style={{ borderRadius: "5px 5px 0px 0px" }}>
                   <b>UNREVEALED</b> TOT NFT
                 </button>
                 <div className="image-container">
@@ -66,7 +71,7 @@ const Sale: React.FC = () => {
                 <div className="line flex-between">
                   <button
                     className="count-btn"
-                    disabled={nftMintCount === 0}
+                    disabled={nftMintCount === 1 || loading}
                     onClick={() => setNftMintCount((c) => c - 1)}
                   >
                     -
@@ -74,7 +79,7 @@ const Sale: React.FC = () => {
                   <p className="counter">{nftMintCount}</p>
                   <button
                     className="count-btn"
-                    disabled={nftMintCount === 5}
+                    disabled={nftMintCount === maxQuantity || loading}
                     onClick={() => setNftMintCount((c) => c + 1)}
                   >
                     +
@@ -84,7 +89,7 @@ const Sale: React.FC = () => {
                   <div className="flex-between mb-20">
                     <p className="primary">Total</p>
                     <p className="primary">
-                      <b>{sellPrice === 0 ? "-" : sellPrice}</b> ETH
+                      <b>{!sellPrice ? "-" : sellPrice * nftMintCount}</b> ETH
                     </p>
                   </div>
                   <button

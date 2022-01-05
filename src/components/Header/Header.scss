@@ -27,6 +27,10 @@
     display: grid;
     place-items: center;
 
+    svg {
+      height: 80%;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -36,10 +40,10 @@
 
   .address {
     color: #fff;
-    font-weight: 600;
     font-size: 14px;
     line-height: 22px;
     border: 1px solid #fff;
+    border-radius: 5px;
     padding: 5px;
   }
 }
